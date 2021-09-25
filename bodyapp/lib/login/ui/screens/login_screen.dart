@@ -1,3 +1,4 @@
+import 'package:bodyapp/register/register.dart';
 import 'package:bodyapp/shared/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/brandico_icons.dart';
@@ -40,12 +41,20 @@ class LoginScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Center(
-                child: Text(
-                  'Novo aqui? Cria uma conta aqui.',
-                  style: GoogleFonts.rokkitt(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w400,
+                child: TextButton(
+                  child: Text(
+                    'Novo aqui? Cria uma conta aqui.',
+                    style: GoogleFonts.rokkitt(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
+                  onPressed: () => {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RegisterScreen())),
+                  },
                 ),
               ),
             ),
@@ -57,17 +66,26 @@ class LoginScreen extends StatelessWidget {
               children: [
                 IconButton(
                   onPressed: null,
-                  icon: Icon(Brandico.facebook_1),
+                  icon: Icon(
+                    Brandico.facebook_1,
+                    color: Colors.blueAccent,
+                  ),
                   iconSize: 32,
                 ),
                 IconButton(
                   onPressed: null,
-                  icon: Icon(Brandico.twitter_bird),
+                  icon: Icon(
+                    Brandico.twitter_bird,
+                    color: Colors.lightBlueAccent,
+                  ),
                   iconSize: 32,
                 ),
                 IconButton(
                   onPressed: null,
-                  icon: Icon(Brandico.googleplus_rect),
+                  icon: Icon(
+                    Brandico.googleplus_rect,
+                    color: Colors.redAccent,
+                  ),
                   iconSize: 32,
                 ),
               ],

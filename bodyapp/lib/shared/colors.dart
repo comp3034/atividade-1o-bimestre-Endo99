@@ -41,6 +41,7 @@ class AppColors {
       700: Color(0xFF056D6D),
       800: Color(0xFF046363),
       900: Color(0xFF025050),
+      1000: Color(0XFFFC4C4C4),
     },
   );
   static const int _tealPrimaryValue = 0xFF078080;

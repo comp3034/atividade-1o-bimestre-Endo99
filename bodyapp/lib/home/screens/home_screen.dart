@@ -1,3 +1,6 @@
+import 'package:bodyapp/login/login.dart';
+import 'package:bodyapp/objetivos/objetivos.dart';
+import 'package:bodyapp/progressao/progressao.dart';
 import 'package:bodyapp/shared/colors.dart';
 import 'package:boxicons/boxicons.dart';
 import 'package:flutter/material.dart';
@@ -28,23 +31,48 @@ class HomeScreen extends StatelessWidget {
             ),
             Column(
               children: [
-                MenuItemWidget(
-                  icon: Boxicons.bx_ruler,
-                  label: 'Medidas',
-                  textStyle: menuStyle,
-                  iconSize: MediaQuery.of(context).size.height * (24 / 568),
+                FlatButton(
+                  color: Colors.white,
+                  child: MenuItemWidget(
+                    icon: Boxicons.bx_ruler,
+                    label: 'Medidas',
+                    textStyle: menuStyle,
+                    iconSize: MediaQuery.of(context).size.height * (24 / 568),
+                  ),
+                  onPressed: () => {},
                 ),
-                MenuItemWidget(
-                  icon: Boxicons.bx_target_lock,
-                  label: 'Objetivos',
-                  textStyle: menuStyle,
-                  iconSize: MediaQuery.of(context).size.height * (24 / 568),
+                FlatButton(
+                  color: Colors.white,
+                  child: MenuItemWidget(
+                    icon: Boxicons.bx_target_lock,
+                    label: 'Objetivos',
+                    textStyle: menuStyle,
+                    iconSize: MediaQuery.of(context).size.height * (24 / 568),
+                  ),
+                  onPressed: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ObjetivosScreen(),
+                      ),
+                    ),
+                  },
                 ),
-                MenuItemWidget(
-                  icon: Boxicons.bx_line_chart,
-                  label: 'Progressão',
-                  textStyle: menuStyle,
-                  iconSize: MediaQuery.of(context).size.height * (24 / 568),
+                FlatButton(
+                  child: MenuItemWidget(
+                    icon: Boxicons.bx_line_chart,
+                    label: 'Progressão',
+                    textStyle: menuStyle,
+                    iconSize: MediaQuery.of(context).size.height * (24 / 568),
+                  ),
+                  onPressed: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProgressaoScreen(),
+                      ),
+                    ),
+                  },
                 ),
               ],
             ),
@@ -53,17 +81,30 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 24.0),
               child: Column(
                 children: [
-                  MenuItemWidget(
-                    icon: Boxicons.bx_slider_alt,
-                    label: 'Configurações',
-                    textStyle: subMenuStyle,
-                    iconSize: MediaQuery.of(context).size.height * (16 / 568),
+                  FlatButton(
+                    child: MenuItemWidget(
+                      icon: Boxicons.bx_slider_alt,
+                      label: 'Configurações',
+                      textStyle: subMenuStyle,
+                      iconSize: MediaQuery.of(context).size.height * (16 / 568),
+                    ),
+                    onPressed: () => {},
                   ),
-                  MenuItemWidget(
-                    icon: Boxicons.bx_log_out,
-                    label: 'Logout',
-                    textStyle: subMenuStyle,
-                    iconSize: MediaQuery.of(context).size.height * (16 / 568),
+                  FlatButton(
+                    child: MenuItemWidget(
+                      icon: Boxicons.bx_log_out,
+                      label: 'Logout',
+                      textStyle: subMenuStyle,
+                      iconSize: MediaQuery.of(context).size.height * (16 / 568),
+                    ),
+                    onPressed: () => {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LoginScreen(),
+                        ),
+                      ),
+                    },
                   ),
                 ],
               ),
@@ -134,7 +175,9 @@ class TopBarWidget extends StatelessWidget {
         children: [
           Row(
             children: [
-              Expanded(child: SizedBox()),
+              Expanded(
+                child: SizedBox(),
+              ),
               Container(
                 width: (MediaQuery.of(context).size.width * (128 / 320)),
                 height: MediaQuery.of(context).size.height * (161 / 568),
