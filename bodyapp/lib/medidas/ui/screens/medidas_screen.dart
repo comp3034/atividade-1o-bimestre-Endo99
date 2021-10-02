@@ -1,5 +1,6 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 class MedidasScreen extends StatelessWidget {
   const MedidasScreen({Key? key}) : super(key: key);
@@ -12,16 +13,19 @@ class MedidasScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Medidas'),
         centerTitle: true,
+        backgroundColor: Color(0XFF008B8B),
       ),
       body: Container(
         height: double.infinity,
         child: Stack(
           children: [
-            Positioned(
-              height: height - 64,
-              child: Image.asset(
-                'assets/images/women-silhouette.png',
-                fit: BoxFit.fitHeight,
+            Container(
+              child: Positioned(
+                height: height - 64,
+                child: Image.asset(
+                  'assets/images/women-silhouette.png',
+                  fit: BoxFit.fitHeight,
+                ),
               ),
             ),
             Positioned(
@@ -49,7 +53,7 @@ class MedidasScreen extends StatelessWidget {
               ),
             ),
             NestedMeasureWidget(
-              top: 188,
+              top: 148.5,
               left: 0,
               width: width * .5,
               label: 'Pescoço',
@@ -57,10 +61,50 @@ class MedidasScreen extends StatelessWidget {
               measure: ' cm',
             ),
             NestedMeasureWidget(
-              top: 188 + 48,
+              top: 148.5 + 48,
               left: 0,
               width: width * .6,
               label: 'Peito',
+              value: '95',
+              measure: ' cm',
+            ),
+            NestedMeasureWidget(
+              top: 151.5 + 75.5,
+              left: 59.5,
+              width: width * .3,
+              label: 'Bíceps',
+              value: '95',
+              measure: ' cm',
+            ),
+            NestedMeasureWidget(
+              top: 148.5 + 150,
+              left: 8.5,
+              width: width * .6,
+              label: 'Cintura',
+              value: '95',
+              measure: ' cm',
+            ),
+            NestedMeasureWidget(
+              top: 148.5 + 180.5,
+              left: 20.5,
+              width: width * .45,
+              label: 'Quadril',
+              value: '95',
+              measure: ' cm',
+            ),
+            NestedMeasureWidget(
+              top: 148.5 + 260.5,
+              left: 8.5,
+              width: width * .6,
+              label: 'Coxa',
+              value: '95',
+              measure: ' cm',
+            ),
+            NestedMeasureWidget(
+              top: 148.5 + 370.5,
+              left: 8.5,
+              width: width * .6,
+              label: 'Panturilha',
               value: '95',
               measure: ' cm',
             ),
@@ -105,10 +149,12 @@ class NestedMeasureWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 16.0, right: 8),
-                child: DottedLine(
-                  dashGapLength: 8,
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16.0, right: 8),
+                  child: DottedLine(
+                    dashGapLength: 8,
+                  ),
                 ),
               ),
             ),
@@ -141,18 +187,25 @@ class MeasureLabelWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('$label'),
+        Text(
+          '$label',
+          style: TextStyle(
+            color: Colors.black,
+          ),
+        ),
         RichText(
           text: TextSpan(
             text: '$value',
             style: TextStyle(
               fontSize: 36,
+              color: Colors.black,
             ),
             children: [
               TextSpan(
                 text: ' $measure',
                 style: TextStyle(
                   fontSize: 12,
+                  color: Colors.black,
                 ),
               ),
             ],
@@ -161,4 +214,25 @@ class MeasureLabelWidget extends StatelessWidget {
       ],
     );
   }
+}
+
+class SemiCirculo extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint paint = Paint()..color = Colors.blue;
+    canvas.drawArc(
+      Rect.fromCenter(
+        center: Offset(size.height / 2, size.width / 2),
+        height: size.height,
+        width: size.width,
+      ),
+      pi,
+      pi,
+      false,
+      paint,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

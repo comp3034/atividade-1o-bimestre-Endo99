@@ -1,7 +1,7 @@
 import 'package:bodyapp/home/home.dart';
+import 'package:bodyapp/medidas/medidas.dart';
 import 'package:bodyapp/register/ui/screens/register_screen.dart';
 import 'package:bodyapp/shared/colors.dart';
-import 'package:bodyapp/singup/ui/screens/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:pixel_perfect/pixel_perfect.dart';
 
@@ -10,7 +10,7 @@ import 'login/login.dart';
 // import 'home/home.dart';
 
 void main() {
-  runApp(MaterialApp(home: HomeScreen()));
+  runApp(MaterialApp(home: MedidasScreen()));
 }
 
 class MyApp extends StatelessWidget {

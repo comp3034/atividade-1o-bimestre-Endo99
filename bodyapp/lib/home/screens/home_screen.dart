@@ -1,4 +1,5 @@
 import 'package:bodyapp/login/login.dart';
+import 'package:bodyapp/medidas/ui/screens/medidas_screen.dart';
 import 'package:bodyapp/objetivos/objetivos.dart';
 import 'package:bodyapp/progressao/progressao.dart';
 import 'package:bodyapp/shared/colors.dart';
@@ -39,7 +40,14 @@ class HomeScreen extends StatelessWidget {
                     textStyle: menuStyle,
                     iconSize: MediaQuery.of(context).size.height * (24 / 568),
                   ),
-                  onPressed: () => {},
+                  onPressed: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MedidasScreen(),
+                      ),
+                    ),
+                  },
                 ),
                 FlatButton(
                   color: Colors.white,

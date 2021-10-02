@@ -111,8 +111,8 @@ class _AvatarStates extends State<Avatar> {
                     icon: Icon(
                       Icons.person_add_alt_1_rounded,
                       color: AppColors.teal[400],
-                      size: 35.0,
                     ),
+                    iconSize: 60.0,
                     onPressed: () {
                       getImage(ImageSource.gallery);
                     },
