@@ -52,6 +52,62 @@ class MedidasScreen extends StatelessWidget {
                 ],
               ),
             ),
+            Positioned(
+              right: 28.5,
+              top: 200,
+              child: Column(
+                children: [
+                  SizedBox(
+                    width: 90,
+                    height: 95,
+                    child: CustomPaint(
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 20, right: 8, top: 16),
+                        child: MeasureLabelWidget(
+                          label: 'Gordura',
+                          value: '170',
+                        ),
+                      ),
+                      painter: semiCirculo(
+                          progress: 0.7,
+                          primaryColor: Colors.green,
+                          secondColor: Colors.red,
+                          thirdColor: Colors.lightBlue,
+                          fourtColor: Colors.blue,
+                          width: 6.0),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Positioned(
+              right: 28.5,
+              top: 350,
+              child: Column(
+                children: [
+                  SizedBox(
+                    width: 90,
+                    height: 95,
+                    child: CustomPaint(
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 20, right: 8, top: 16),
+                        child: MeasureLabelWidget(
+                          label: 'IMC',
+                          value: '22',
+                        ),
+                      ),
+                      painter: semiCirculo(
+                          progress: 0.7,
+                          primaryColor: Colors.green,
+                          secondColor: Colors.red,
+                          thirdColor: Colors.lightBlue,
+                          fourtColor: Colors.blue,
+                          width: 6.0),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             NestedMeasureWidget(
               top: 148.5,
               left: 0,
@@ -216,21 +272,50 @@ class MeasureLabelWidget extends StatelessWidget {
   }
 }
 
-class SemiCirculo extends CustomPainter {
+class semiCirculo extends CustomPainter {
+  const semiCirculo({
+    required this.progress,
+    required this.primaryColor,
+    required this.secondColor,
+    required this.thirdColor,
+    required this.fourtColor,
+    required this.width,
+  })  : assert(progress != null),
+        assert(primaryColor != null),
+        assert(secondColor != null),
+        assert(thirdColor != null),
+        assert(fourtColor != null),
+        assert(width != null),
+        super();
+
+  final double progress;
+  final Color primaryColor;
+  final Color secondColor;
+  final Color thirdColor;
+  final Color fourtColor;
+  final double width;
+
   @override
   void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()..color = Colors.blue;
-    canvas.drawArc(
-      Rect.fromCenter(
-        center: Offset(size.height / 2, size.width / 2),
-        height: size.height,
-        width: size.width,
-      ),
-      pi,
-      pi,
-      false,
-      paint,
+    final rect = new Rect.fromLTWH(.2, 1.0, size.width, size.height);
+    final gradient = new SweepGradient(
+      startAngle: 3 * pi / 2,
+      endAngle: 7 * pi / 2,
+      tileMode: TileMode.repeated,
+      colors: [primaryColor, secondColor, thirdColor, fourtColor],
     );
+
+    final paint = new Paint()
+      ..shader = gradient.createShader(rect)
+      ..strokeCap = StrokeCap.butt // StrokeCap.round is not recommended.
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = width;
+    final center = new Offset(size.width / 2, size.height / 2);
+    final radius = min(size.width / 2, size.height / 2) - (width / 2);
+    final startAngle = pi;
+    final sweepAngle = 2 * pi * progress;
+    canvas.drawArc(new Rect.fromCircle(center: center, radius: radius),
+        startAngle, sweepAngle, false, paint);
   }
 
   @override
