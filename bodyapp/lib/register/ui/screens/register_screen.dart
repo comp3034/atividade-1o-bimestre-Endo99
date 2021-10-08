@@ -141,7 +141,9 @@ class _RegisterFormWidgetState extends State<RegisterFormWidget> {
   RegExp _upper = RegExp(r'[A-Z]');
   RegExp _lower = RegExp(r'[a-z]');
   RegExp _numeric = RegExp(r'[0-9]');
+  bool isConfirmPasswordObscured = true;
   bool isPasswordObscured = true;
+  String _password = '';
 
   @override
   Widget build(BuildContext context) {
@@ -178,44 +180,49 @@ class _RegisterFormWidgetState extends State<RegisterFormWidget> {
           Padding(
             padding: const EdgeInsets.only(top: 20.0, right: 50.0, left: 50.0),
             child: InputWidget(
-              hintText: 'Senha',
-              prefixIcon: Icons.lock,
-              sufixIcon:
-                  isPasswordObscured ? Icons.visibility_off : Icons.visibility,
-              obscureText: isPasswordObscured,
-              suffixIconOnPressed: () {
-                setState(() {
-                  isPasswordObscured = !isPasswordObscured;
-                });
-              },
-              validator: (value) {
-                if (value != null && value.length < 6) {
-                  return 'A senha deve conter no mínimo 6 caracteres';
-                }
-                if (value != null && !value.contains(_upper)) {
-                  return 'A senha deve conter pelo menos um caractere uppercase.';
-                }
-                if (value != null && !value.contains(_lower)) {
-                  return 'A senha deve conter pelo menos um caractere lowercase.';
-                }
-                if (value != null && !value.contains(_numeric)) {
-                  return 'A senha deve conter pelo menos um caractere numerico.';
-                }
-                return null;
-              },
-            ),
+                hintText: 'Senha',
+                prefixIcon: Icons.lock,
+                sufixIcon: isPasswordObscured
+                    ? Icons.visibility_off
+                    : Icons.visibility,
+                obscureText: isPasswordObscured,
+                suffixIconOnPressed: () {
+                  setState(() {
+                    isPasswordObscured = !isPasswordObscured;
+                  });
+                },
+                validator: (value) {
+                  if (value != null && value.length < 6) {
+                    return 'A senha deve conter no mínimo 6 caracteres';
+                  }
+                  if (value != null && !value.contains(_upper)) {
+                    return 'A senha deve conter pelo menos um caractere uppercase.';
+                  }
+                  if (value != null && !value.contains(_lower)) {
+                    return 'A senha deve conter pelo menos um caractere lowercase.';
+                  }
+                  if (value != null && !value.contains(_numeric)) {
+                    return 'A senha deve conter pelo menos um caractere numerico.';
+                  }
+                  if (value != _password) {
+                    return 'A senha e a confirmação devem ser iguais.';
+                  }
+                  return null;
+                },
+                onChanged: (value) => {_password = value}),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 20.0, right: 50, left: 50),
             child: InputWidget(
               hintText: 'Confirmar senha',
               prefixIcon: Icons.lock,
-              sufixIcon:
-                  isPasswordObscured ? Icons.visibility_off : Icons.visibility,
-              obscureText: isPasswordObscured,
+              sufixIcon: isConfirmPasswordObscured
+                  ? Icons.visibility_off
+                  : Icons.visibility,
+              obscureText: isConfirmPasswordObscured,
               suffixIconOnPressed: () {
                 setState(() {
-                  isPasswordObscured = !isPasswordObscured;
+                  isConfirmPasswordObscured = !isConfirmPasswordObscured;
                 });
               },
               validator: (value) {

@@ -53,8 +53,9 @@ class MedidasScreen extends StatelessWidget {
               ),
             ),
             Positioned(
+              // Gordura
               right: 28.5,
-              top: 200,
+              top: height - 550,
               child: Column(
                 children: [
                   SizedBox(
@@ -81,8 +82,9 @@ class MedidasScreen extends StatelessWidget {
               ),
             ),
             Positioned(
+              // IMC
               right: 28.5,
-              top: 350,
+              top: height - 425,
               child: Column(
                 children: [
                   SizedBox(
@@ -109,7 +111,7 @@ class MedidasScreen extends StatelessWidget {
               ),
             ),
             NestedMeasureWidget(
-              top: 148.5,
+              top: height - 610.5,
               left: 0,
               width: width * .5,
               label: 'Pescoço',
@@ -117,7 +119,7 @@ class MedidasScreen extends StatelessWidget {
               measure: ' cm',
             ),
             NestedMeasureWidget(
-              top: 148.5 + 48,
+              top: height - 560.5,
               left: 0,
               width: width * .6,
               label: 'Peito',
@@ -125,7 +127,7 @@ class MedidasScreen extends StatelessWidget {
               measure: ' cm',
             ),
             NestedMeasureWidget(
-              top: 151.5 + 75.5,
+              top: height - 520.5,
               left: 59.5,
               width: width * .3,
               label: 'Bíceps',
@@ -133,7 +135,7 @@ class MedidasScreen extends StatelessWidget {
               measure: ' cm',
             ),
             NestedMeasureWidget(
-              top: 148.5 + 150,
+              top: height - 470.5,
               left: 8.5,
               width: width * .6,
               label: 'Cintura',
@@ -141,7 +143,7 @@ class MedidasScreen extends StatelessWidget {
               measure: ' cm',
             ),
             NestedMeasureWidget(
-              top: 148.5 + 180.5,
+              top: height - 420.5,
               left: 20.5,
               width: width * .45,
               label: 'Quadril',
@@ -149,7 +151,7 @@ class MedidasScreen extends StatelessWidget {
               measure: ' cm',
             ),
             NestedMeasureWidget(
-              top: 148.5 + 260.5,
+              top: height - 345.5,
               left: 8.5,
               width: width * .6,
               label: 'Coxa',
@@ -157,7 +159,7 @@ class MedidasScreen extends StatelessWidget {
               measure: ' cm',
             ),
             NestedMeasureWidget(
-              top: 148.5 + 370.5,
+              top: height - 235.5,
               left: 8.5,
               width: width * .6,
               label: 'Panturilha',
