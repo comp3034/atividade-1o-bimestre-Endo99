@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:bodyapp/dieta/dieta.dart';
+import 'package:bodyapp/dieta/ui/screens/mais_dietas_screen.dart';
 import 'package:bodyapp/objetivos/ui/screens/screens.dart';
 import 'package:bodyapp/shared/widgets/widgets.dart';
 import 'package:direct_select_flutter/direct_select_container.dart';

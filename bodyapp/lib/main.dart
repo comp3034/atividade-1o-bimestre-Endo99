@@ -1,15 +1,16 @@
-import 'package:bodyapp/objetivos/objetivos.dart';
+import 'package:bodyapp/home/home.dart';
+import 'package:bodyapp/medidas/medidas.dart';
+import 'package:bodyapp/register/ui/screens/register_screen.dart';
 import 'package:bodyapp/shared/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:pixel_perfect/pixel_perfect.dart';
 
 import 'dieta/dieta.dart';
 import 'login/login.dart';
-import 'medidas/medidas.dart';
 // import 'home/home.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MaterialApp(home: MedidasScreen()));
 }
 
 class MyApp extends StatelessWidget {
@@ -37,7 +38,12 @@ class MyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: MedidasScreen(),
+      home: PixelPerfect(
+        assetPath: 'design/screens/dieta.png',
+        scale: .64,
+        initOpacity: 0,
+        child: DietaScreen(),
+      ),
     );
   }
 }

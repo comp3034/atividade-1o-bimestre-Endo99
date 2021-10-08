@@ -1,5 +1,6 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 class MedidasScreen extends StatelessWidget {
   const MedidasScreen({Key? key}) : super(key: key);
@@ -12,16 +13,19 @@ class MedidasScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Medidas'),
         centerTitle: true,
+        backgroundColor: Color(0XFF008B8B),
       ),
       body: Container(
         height: double.infinity,
         child: Stack(
           children: [
-            Positioned(
-              height: height - 64,
-              child: Image.asset(
-                'assets/images/women-silhouette.png',
-                fit: BoxFit.fitHeight,
+            Container(
+              child: Positioned(
+                height: height - 64,
+                child: Image.asset(
+                  'assets/images/women-silhouette.png',
+                  fit: BoxFit.fitHeight,
+                ),
               ),
             ),
             Positioned(
@@ -48,8 +52,66 @@ class MedidasScreen extends StatelessWidget {
                 ],
               ),
             ),
+            Positioned(
+              // Gordura
+              right: 28.5,
+              top: height - 550,
+              child: Column(
+                children: [
+                  SizedBox(
+                    width: 90,
+                    height: 95,
+                    child: CustomPaint(
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 20, right: 8, top: 16),
+                        child: MeasureLabelWidget(
+                          label: 'Gordura',
+                          value: '170',
+                        ),
+                      ),
+                      painter: semiCirculo(
+                          progress: 0.7,
+                          primaryColor: Colors.green,
+                          secondColor: Colors.red,
+                          thirdColor: Colors.lightBlue,
+                          fourtColor: Colors.blue,
+                          width: 6.0),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Positioned(
+              // IMC
+              right: 28.5,
+              top: height - 425,
+              child: Column(
+                children: [
+                  SizedBox(
+                    width: 90,
+                    height: 95,
+                    child: CustomPaint(
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 20, right: 8, top: 16),
+                        child: MeasureLabelWidget(
+                          label: 'IMC',
+                          value: '22',
+                        ),
+                      ),
+                      painter: semiCirculo(
+                          progress: 0.7,
+                          primaryColor: Colors.green,
+                          secondColor: Colors.red,
+                          thirdColor: Colors.lightBlue,
+                          fourtColor: Colors.blue,
+                          width: 6.0),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             NestedMeasureWidget(
-              top: 188,
+              top: height - 610.5,
               left: 0,
               width: width * .5,
               label: 'Pescoço',
@@ -57,10 +119,50 @@ class MedidasScreen extends StatelessWidget {
               measure: ' cm',
             ),
             NestedMeasureWidget(
-              top: 188 + 48,
+              top: height - 560.5,
               left: 0,
               width: width * .6,
               label: 'Peito',
+              value: '95',
+              measure: ' cm',
+            ),
+            NestedMeasureWidget(
+              top: height - 520.5,
+              left: 59.5,
+              width: width * .3,
+              label: 'Bíceps',
+              value: '95',
+              measure: ' cm',
+            ),
+            NestedMeasureWidget(
+              top: height - 470.5,
+              left: 8.5,
+              width: width * .6,
+              label: 'Cintura',
+              value: '95',
+              measure: ' cm',
+            ),
+            NestedMeasureWidget(
+              top: height - 420.5,
+              left: 20.5,
+              width: width * .45,
+              label: 'Quadril',
+              value: '95',
+              measure: ' cm',
+            ),
+            NestedMeasureWidget(
+              top: height - 345.5,
+              left: 8.5,
+              width: width * .6,
+              label: 'Coxa',
+              value: '95',
+              measure: ' cm',
+            ),
+            NestedMeasureWidget(
+              top: height - 235.5,
+              left: 8.5,
+              width: width * .6,
+              label: 'Panturilha',
               value: '95',
               measure: ' cm',
             ),
@@ -105,10 +207,12 @@ class NestedMeasureWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 16.0, right: 8),
-                child: DottedLine(
-                  dashGapLength: 8,
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16.0, right: 8),
+                  child: DottedLine(
+                    dashGapLength: 8,
+                  ),
                 ),
               ),
             ),
@@ -141,18 +245,25 @@ class MeasureLabelWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('$label'),
+        Text(
+          '$label',
+          style: TextStyle(
+            color: Colors.black,
+          ),
+        ),
         RichText(
           text: TextSpan(
             text: '$value',
             style: TextStyle(
               fontSize: 36,
+              color: Colors.black,
             ),
             children: [
               TextSpan(
                 text: ' $measure',
                 style: TextStyle(
                   fontSize: 12,
+                  color: Colors.black,
                 ),
               ),
             ],
@@ -161,4 +272,54 @@ class MeasureLabelWidget extends StatelessWidget {
       ],
     );
   }
+}
+
+class semiCirculo extends CustomPainter {
+  const semiCirculo({
+    required this.progress,
+    required this.primaryColor,
+    required this.secondColor,
+    required this.thirdColor,
+    required this.fourtColor,
+    required this.width,
+  })  : assert(progress != null),
+        assert(primaryColor != null),
+        assert(secondColor != null),
+        assert(thirdColor != null),
+        assert(fourtColor != null),
+        assert(width != null),
+        super();
+
+  final double progress;
+  final Color primaryColor;
+  final Color secondColor;
+  final Color thirdColor;
+  final Color fourtColor;
+  final double width;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final rect = new Rect.fromLTWH(.2, 1.0, size.width, size.height);
+    final gradient = new SweepGradient(
+      startAngle: 3 * pi / 2,
+      endAngle: 7 * pi / 2,
+      tileMode: TileMode.repeated,
+      colors: [primaryColor, secondColor, thirdColor, fourtColor],
+    );
+
+    final paint = new Paint()
+      ..shader = gradient.createShader(rect)
+      ..strokeCap = StrokeCap.butt // StrokeCap.round is not recommended.
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = width;
+    final center = new Offset(size.width / 2, size.height / 2);
+    final radius = min(size.width / 2, size.height / 2) - (width / 2);
+    final startAngle = pi;
+    final sweepAngle = 2 * pi * progress;
+    canvas.drawArc(new Rect.fromCircle(center: center, radius: radius),
+        startAngle, sweepAngle, false, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
