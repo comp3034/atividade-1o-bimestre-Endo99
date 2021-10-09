@@ -10,7 +10,7 @@ import 'login/login.dart';
 // import 'home/home.dart';
 
 void main() {
-  runApp(MaterialApp(home: MedidasScreen()));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
         assetPath: 'design/screens/dieta.png',
         scale: .64,
         initOpacity: 0,
-        child: DietaScreen(),
+        child: RegisterScreen(),
       ),
     );
   }

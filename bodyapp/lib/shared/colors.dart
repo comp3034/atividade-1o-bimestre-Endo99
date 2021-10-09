@@ -31,6 +31,7 @@ class AppColors {
   static const MaterialColor teal = MaterialColor(
     _tealPrimaryValue,
     <int, Color>{
+      25: Color(0XFF008B8B),
       50: Color(0xFFE1F0F0),
       100: Color(0xFFB5D9D9),
       200: Color(0xFF83C0C0),

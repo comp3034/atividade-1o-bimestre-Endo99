@@ -17,29 +17,36 @@ class RegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0XFF008B8B),
+        backgroundColor: AppColors.teal[25],
         title: Center(
-            child: Text('Sign Up',
-                style: GoogleFonts.roboto(
-                  fontSize: 40,
-                  color: Colors.white,
-                ))),
+          child: Text(
+            'Sign Up',
+            style: GoogleFonts.roboto(
+              fontSize: 40,
+              color: Colors.white,
+            ),
+          ),
+        ),
         leading: Builder(builder: (BuildContext context) {
-          return IconButton(
-            icon: const Icon(Icons.keyboard_arrow_left_rounded),
-            color: Colors.white,
-            onPressed: () => {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => LoginScreen()))
-            },
+          return SingleChildScrollView(
+            child: IconButton(
+              icon: const Icon(Icons.keyboard_arrow_left_rounded),
+              color: Colors.white,
+              onPressed: () => {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()))
+              },
+            ),
           );
         }),
       ),
-      body: Column(
-        children: [
-          Avatar(),
-          RegisterFormWidget(),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Avatar(),
+            RegisterFormWidget(),
+          ],
+        ),
       ),
     );
   }
@@ -144,6 +151,7 @@ class _RegisterFormWidgetState extends State<RegisterFormWidget> {
   bool isConfirmPasswordObscured = true;
   bool isPasswordObscured = true;
   String _password = '';
+  String _name = '';
 
   @override
   Widget build(BuildContext context) {
@@ -154,15 +162,19 @@ class _RegisterFormWidgetState extends State<RegisterFormWidget> {
           Padding(
             padding: const EdgeInsets.only(top: 20.0, right: 50, left: 50),
             child: InputWidget(
-              hintText: 'Nome',
-              prefixIcon: Icons.person,
-              validator: (value) {
-                if (value != null && value.isEmpty) {
-                  return 'Insira o seu nome';
-                }
-                return null;
-              },
-            ),
+                hintText: 'Nome',
+                prefixIcon: Icons.person,
+                validator: (value) {
+                  if (value != null && value.isEmpty) {
+                    return 'Insira o seu nome';
+                  }
+                  return null;
+                },
+                onChanged: (value) => {
+                      setState(() {
+                        _name = value;
+                      })
+                    }),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 20.0, right: 50.0, left: 50.0),
@@ -180,36 +192,40 @@ class _RegisterFormWidgetState extends State<RegisterFormWidget> {
           Padding(
             padding: const EdgeInsets.only(top: 20.0, right: 50.0, left: 50.0),
             child: InputWidget(
-                hintText: 'Senha',
-                prefixIcon: Icons.lock,
-                sufixIcon: isPasswordObscured
-                    ? Icons.visibility_off
-                    : Icons.visibility,
-                obscureText: isPasswordObscured,
-                suffixIconOnPressed: () {
-                  setState(() {
-                    isPasswordObscured = !isPasswordObscured;
-                  });
-                },
-                validator: (value) {
-                  if (value != null && value.length < 6) {
-                    return 'A senha deve conter no mínimo 6 caracteres';
-                  }
-                  if (value != null && !value.contains(_upper)) {
-                    return 'A senha deve conter pelo menos um caractere uppercase.';
-                  }
-                  if (value != null && !value.contains(_lower)) {
-                    return 'A senha deve conter pelo menos um caractere lowercase.';
-                  }
-                  if (value != null && !value.contains(_numeric)) {
-                    return 'A senha deve conter pelo menos um caractere numerico.';
-                  }
-                  if (value != _password) {
-                    return 'A senha e a confirmação devem ser iguais.';
-                  }
-                  return null;
-                },
-                onChanged: (value) => {_password = value}),
+              hintText: 'Senha',
+              prefixIcon: Icons.lock,
+              sufixIcon:
+                  isPasswordObscured ? Icons.visibility_off : Icons.visibility,
+              obscureText: isPasswordObscured,
+              suffixIconOnPressed: () {
+                setState(() {
+                  isPasswordObscured = !isPasswordObscured;
+                });
+              },
+              validator: (value) {
+                if (value != null && value.length < 6) {
+                  return 'A senha deve conter no mínimo 6 caracteres';
+                }
+                if (value != null && !value.contains(_upper)) {
+                  return 'A senha deve conter pelo menos um caractere uppercase.';
+                }
+                if (value != null && !value.contains(_lower)) {
+                  return 'A senha deve conter pelo menos um caractere lowercase.';
+                }
+                if (value != null && !value.contains(_numeric)) {
+                  return 'A senha deve conter pelo menos um caractere numerico.';
+                }
+                if (value != _password) {
+                  return 'A senha e a confirmação de senha devem ser iguais.';
+                }
+                return null;
+              },
+              onChanged: (value) => {
+                setState(() {
+                  _password = value;
+                })
+              },
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 20.0, right: 50, left: 50),
@@ -238,7 +254,17 @@ class _RegisterFormWidgetState extends State<RegisterFormWidget> {
                 if (value != null && !value.contains(_numeric)) {
                   return 'A senha deve conter pelo menos um caractere numerico.';
                 }
+                if (value != _password) {
+                  return 'A senha e confirmação de senha devem ser iguais';
+                }
                 return null;
+              },
+              onChanged: (value) => {
+                setState(
+                  () {
+                    _password = value;
+                  },
+                ),
               },
             ),
           ),

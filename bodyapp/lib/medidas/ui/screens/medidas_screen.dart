@@ -1,3 +1,4 @@
+import 'package:bodyapp/shared/colors.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
@@ -13,7 +14,7 @@ class MedidasScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Medidas'),
         centerTitle: true,
-        backgroundColor: Color(0XFF008B8B),
+        backgroundColor: AppColors.teal[25],
       ),
       body: Container(
         height: double.infinity,
@@ -70,7 +71,7 @@ class MedidasScreen extends StatelessWidget {
                         ),
                       ),
                       painter: semiCirculo(
-                          progress: 0.7,
+                          progress: 0.5,
                           primaryColor: Colors.green,
                           secondColor: Colors.red,
                           thirdColor: Colors.lightBlue,
@@ -99,7 +100,7 @@ class MedidasScreen extends StatelessWidget {
                         ),
                       ),
                       painter: semiCirculo(
-                          progress: 0.7,
+                          progress: 0.5,
                           primaryColor: Colors.green,
                           secondColor: Colors.red,
                           thirdColor: Colors.lightBlue,
